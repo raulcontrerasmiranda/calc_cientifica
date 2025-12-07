@@ -67,6 +67,26 @@ double raizCuadrada(double x) {
     return aproximacion;
 }
 
+double exponencial(double x) {
+    const int MAX_TERMINOS = 50;
+    double resultado = 1.0;
+    double termino = 1.0;
+    
+    for (int n = 1; n < MAX_TERMINOS; n++) {
+        termino = multiplicacion(termino, x);
+        termino = division(termino, static_cast<double>(n));
+        resultado = suma(resultado, termino);
+        
+        double terminoAbs = valorAbsoluto(termino);
+        
+        if (terminoAbs < 0.0000000001) {
+            break;
+        }
+    }
+    
+    return resultado;
+}
+
 bool areEqual(double a, double b) {
     double diff = resta(a, b);
     if (diff < 0) diff = multiplicacion(diff, -1.0);
@@ -203,6 +223,36 @@ void testRaizCuadrada() {
     cout << "Test Raiz Cuadrada: PASA" << endl;
 }
 
+void testExponencial() {
+    cout << "Test Exponencial iniciado..." << endl;
+    
+    if (!areEqual(exponencial(0.0), 1.0)) {
+        cout << "FALLA: e^0 = 1" << endl;
+        cout << "Obtenido: " << exponencial(0.0) << endl;
+        return;
+    }
+    
+    if (!areEqual(exponencial(1.0), 2.718)) {
+        cout << "FALLA: e^1 = 2.718" << endl;
+        cout << "Obtenido: " << exponencial(1.0) << endl;
+        return;
+    }
+    
+    if (!areEqual(exponencial(2.0), 7.389)) {
+        cout << "FALLA: e^2 = 7.389" << endl;
+        cout << "Obtenido: " << exponencial(2.0) << endl;
+        return;
+    }
+    
+    if (!areEqual(exponencial(-1.0), 0.368)) {
+        cout << "FALLA: e^(-1) = 0.368" << endl;
+        cout << "Obtenido: " << exponencial(-1.0) << endl;
+        return;
+    }
+    
+    cout << "Test Exponencial: PASA" << endl;
+}
+
 int main() {
     cout << "Ejecutando pruebas de la Calculadora Cientifica..." << endl;
     cout << "=================================================" << endl;
@@ -211,5 +261,8 @@ int main() {
     testMultiplicacion();
     testDivision();
     testRaizCuadrada();
+    testExponencial();
+    cout << "=================================================" << endl;
+    cout << "Todas las pruebas completadas!" << endl;
     return 0;
 }
