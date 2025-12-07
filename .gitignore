@@ -1,0 +1,25 @@
+# Ejecutables
+*.exe
+*.out
+test_calculator
+calculator
+
+# Archivos objeto
+*.o
+*.obj
+
+# Archivos de compilacion
+*.a
+*.so
+*.dylib
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Sistema
+.DS_Store
+Thumbs.db
