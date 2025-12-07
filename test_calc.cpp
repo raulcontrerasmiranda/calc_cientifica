@@ -23,6 +23,50 @@ double division(double a, double b) {
     return a / b;
 }
 
+double valorAbsoluto(double x) {
+    if (x < 0) {
+        return multiplicacion(x, -1.0);
+    }
+    return x;
+}
+
+double raizCuadrada(double x) {
+    if (x < 0.0) {
+        return 0.0;
+    }
+    
+    if (x == 0.0) {
+        return 0.0;
+    }
+    
+    double aproximacion = x;
+    double anterior;
+    const double tolerancia = 0.000001;
+    int iteraciones = 0;
+    const int MAX_ITER = 100;
+    
+    do {
+        anterior = aproximacion;
+        double cociente = division(x, aproximacion);
+        aproximacion = division(suma(aproximacion, cociente), 2.0);
+        
+        double diferencia = valorAbsoluto(resta(anterior, aproximacion));
+        
+        iteraciones = suma(iteraciones, 1);
+        
+        if (diferencia < tolerancia) {
+            break;
+        }
+        
+        if (iteraciones >= MAX_ITER) {
+            break;
+        }
+        
+    } while (true);
+    
+    return aproximacion;
+}
+
 bool areEqual(double a, double b) {
     double diff = resta(a, b);
     if (diff < 0) diff = multiplicacion(diff, -1.0);
@@ -123,6 +167,42 @@ void testDivision() {
     cout << "Test Division: PASA" << endl;
 }
 
+void testRaizCuadrada() {
+    cout << "Test Raiz Cuadrada iniciado..." << endl;
+    
+    if (!areEqual(raizCuadrada(4.0), 2.0)) {
+        cout << "FALLA: sqrt(4) = 2" << endl;
+        cout << "Obtenido: " << raizCuadrada(4.0) << endl;
+        return;
+    }
+    
+    if (!areEqual(raizCuadrada(9.0), 3.0)) {
+        cout << "FALLA: sqrt(9) = 3" << endl;
+        cout << "Obtenido: " << raizCuadrada(9.0) << endl;
+        return;
+    }
+    
+    if (!areEqual(raizCuadrada(16.0), 4.0)) {
+        cout << "FALLA: sqrt(16) = 4" << endl;
+        cout << "Obtenido: " << raizCuadrada(16.0) << endl;
+        return;
+    }
+    
+    if (!areEqual(raizCuadrada(2.0), 1.414)) {
+        cout << "FALLA: sqrt(2) = 1.414" << endl;
+        cout << "Obtenido: " << raizCuadrada(2.0) << endl;
+        return;
+    }
+    
+    if (!areEqual(raizCuadrada(0.25), 0.5)) {
+        cout << "FALLA: sqrt(0.25) = 0.5" << endl;
+        cout << "Obtenido: " << raizCuadrada(0.25) << endl;
+        return;
+    }
+    
+    cout << "Test Raiz Cuadrada: PASA" << endl;
+}
+
 int main() {
     cout << "Ejecutando pruebas de la Calculadora Cientifica..." << endl;
     cout << "=================================================" << endl;
@@ -130,5 +210,6 @@ int main() {
     testResta();
     testMultiplicacion();
     testDivision();
+    testRaizCuadrada();
     return 0;
 }
