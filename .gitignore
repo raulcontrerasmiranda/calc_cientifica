@@ -3,6 +3,9 @@
 *.out
 test_calculator
 calculator
+test_calculadora
+calculadora
+test_calc
 
 # Archivos objeto
 *.o
