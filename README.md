@@ -31,24 +31,24 @@ El historial de commits refleja este proceso incremental.
 
 ### Compilar tests
 ```bash
-g++ -o test_calculator test_calculator.cpp -std=c++11
+g++ -o test_calc test_calc.cpp -std=c++11
 ```
 
 ### Compilar programa principal
 ```bash
-g++ -o calculator calculator.cpp -std=c++11
+g++ -o calc calc.cpp -std=c++11
 ```
 
 ## Ejecución
 
 ### Ejecutar tests
 ```bash
-./test_calculator
+./test_calc
 ```
 
 ### Ejecutar calculadora
 ```bash
-./calculator
+./calc
 ```
 
 ## Estructura del Proyecto
@@ -56,7 +56,7 @@ g++ -o calculator calculator.cpp -std=c++11
 .
 ├── README.md              # Este archivo
 ├── test_calculator.cpp    # Tests y funciones de la calculadora
-├── calculator.cpp         # Programa principal con interfaz de usuario
+├── calculator.cpp         # Programa principal
 └── .gitignore            # Archivos ignorados por Git
 ```
 
